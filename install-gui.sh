@@ -38,8 +38,11 @@ if [ "$(uname)" = "Linux" ]; then
                 echo "Installing on RockyLinux"
                 dnf module enable nodejs:12
                 sudo dnf install -y nodejs
-        fi
-
+  elif type dnf && [ -f /etc/fedora-release ]; then
+    # Fedora
+    echo "Installing on Fedora"
+    sudo dnf install -y nodejs
+  fi
 elif [ "$(uname)" = "Darwin" ] && type brew && ! npm version >/dev/null 2>&1; then
 	# Install npm if not installed
 	brew install npm
